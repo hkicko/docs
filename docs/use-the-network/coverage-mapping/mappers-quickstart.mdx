@@ -16,10 +16,9 @@ any LoRaWAN compatible tracker will work.
 ### Steps
 
 1. Add device to Console.
-2. Create new Label and HTTP integration with Mappers API ingest endpoint.
-3. Create Function Decoder to decode device payload and attach to Label created
-   in first step.
-4. Attach Label to tracking device and verify data is being sent successfully.
+2. Create new HTTP integration with Mappers API ingest endpoint.
+3. Create Function Decoder to decode device payload.
+4. Create a Flow and verify data is being sent successfully.
 
 ### 1. Add Device to Console
 
@@ -45,9 +44,7 @@ Next we'll fill in the details, see instructions and image below.
 1. Enter the Mappers API Ingest endpoint
    `https://mappers.helium.com/api/v1/ingest/uplink`
 2. Enter the name for this Integration: _Mappers Integration_
-3. Create and apply a Label for this Integration, we've used the same name as
-   the integration.
-4. Finally, click _Add Integration_ to complete.
+3. Finally, click _Add Integration_ to complete.
 
 <img
   src={useBaseUrl(
@@ -129,9 +126,7 @@ click _Add Function_.
    does not output a measure of accuracy and this is a reasonable measure of
    precision to be expected for this device. Find more details on the API
    specification [here](/use-the-network/coverage-mapping/mappers-api).
-3. Next search for and add the _Mappers Integration_ label we created with the
-   integration.
-4. Finally save your function.
+3. Finally save your function.
 
 <img
   src={useBaseUrl(
@@ -139,10 +134,10 @@ click _Add Function_.
   )}
 />
 
-### 4. Attach Label to Device
+### 4. Create a Flow
 
-Next we'll attach the _Mappers Integration_ label to the device. Navigate to
-your device page and click the Add Label button shown below.
+Next we'll create a [_Flow_](/use-the-network/console/flows/orientation). Navigate to the Flows page and
+click the + sign next to Nodes.
 
 <img
   src={useBaseUrl(
@@ -150,7 +145,9 @@ your device page and click the Add Label button shown below.
   )}
 />
 
-Search for the _Mappers Integration_ label and click _Add Label_ as shown below.
+Drag and drop your device, function and integration on the workspace. Link them 
+by drawing lines with your mouse between the connection points. 
+Link device -> decoder -> integration.
 
 <img
   src={useBaseUrl(
@@ -170,5 +167,6 @@ shown below.
 />
 
 That's all! You can now expect to see your data show up on
-[mappers.helium.com](https://mappers.helium.com) in eight hours or less. The map
-data is updated every six hours starting at 04:20 UTC.
+[mappers.helium.com](https://mappers.helium.com) within minutes. If you want to 
+see where your mapper is on the map, you could use [Cargo](https://cargo.helium.com).
+You will have to add one more [integration](/use-the-network/console/integrations/cargo/#add-a-cargo-integration) and link it to the decoder in your flow.
